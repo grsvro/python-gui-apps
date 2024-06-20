@@ -9,11 +9,12 @@ fg_color = "#FFFFFF"  # 白
 window.configure(bg=bg_color)
 # ↑↑↑ お約束のコード ↑↑↑
 
-list = ["hallo","gg","nice","great","super"]
+list = ["hallo","gg","nice","great","super","かに","えび"]
 
 odai = random.choice(list)
 
 def button_action():  # 関数の定義 ※ボタンが押されたときの動き
+    global odai
     user_input = entry1.get()
     if text1.cget("text") == user_input:
         odai = random.choice(list)
