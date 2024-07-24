@@ -4,8 +4,9 @@ import random
 # ↓↓↓ お約束のコード ↓↓↓
 window = tk.Tk()
 window.title("GUI App")
-window.geometry("600x400")
-bg_color = "#333333"  # ダークグレー
+window.geometry("500x500")
+bg_color = "#3e5f6f"
+#"#333333"  # ダークグレー
 fg_color = "#FFFFFF"  # 白
 window.configure(bg=bg_color)
 # ↑↑↑ お約束のコード ↑↑↑
@@ -29,7 +30,10 @@ def button_action(i,j):
         buttons[i][j].config(text="O", state=tk.DISABLED)
         XO = 1
         if not win("O"):
-            cpt()
+            try:
+                cpt()
+            except IndexError:
+                text1.config(text="引き分け")
     else:
         buttons[i][j].config(text="X", state=tk.DISABLED)
         XO = 0
@@ -64,6 +68,9 @@ def win(player):
 #コンピューター
 def cpt():
         #勝ちに行く
+        if buttons[1][1].cget("text") == "":
+            button_action(1,1)
+            return
         for i in range(3):
             for j in range(3):
                 if buttons[i][j].cget("text") == "":
@@ -97,7 +104,7 @@ text2 = tk.Label(window, text="あなたはOです", bg=bg_color, fg=fg_color, f
 text2.pack(pady=10)
 
 # リセットボタンの作成
-button0 = tk.Button(window, text="リセット", command=button_action0, font=("Helvetiva",25))
+button0 = tk.Button(window, text="リセット", command=button_action0, font=("Helvetiva",25,"bold"), highlightbackground="#6e848c", highlightcolor="#7f9f9a", highlightthickness=2, fg="#3e5f6f", bg="#7f9f9a") #6e848c #7f9f9a
 button0.pack(pady=10)
 
 # フレームの作成
@@ -110,7 +117,7 @@ buttons = []
 for i in range(3):
     row_button = []
     for j in range(3):
-        button = tk.Button(frame, text="",command=lambda row=i, col=j: button_action(row, col), font=("Helvetiva",25))
+        button = tk.Button(frame, text="",command=lambda row=i, col=j: button_action(row, col), font=("Helvetiva",25,"bold"), width=2, height=2, highlightbackground="#6e848c", highlightcolor="#7f9f9a", highlightthickness=2)
         button.grid(row=i, column=j)
         row_button.append(button)
     buttons.append(row_button)
